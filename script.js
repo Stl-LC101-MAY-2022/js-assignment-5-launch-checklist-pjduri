@@ -1,5 +1,7 @@
 //const { formSubmission } = require("./scriptHelper");
 
+//const { formSubmission } = require("./scriptHelper");
+
 // Write your JavaScript code here!
 window.addEventListener("load", function() {
 
@@ -8,22 +10,26 @@ window.addEventListener("load", function() {
     const formField = this.document.querySelector("formField")
     const formSubmit = this.document.getElementById('formSubmit')
     const pilotName = this.document.querySelector('input[name=pilotName]')
-    const faultyItems = this.document.querySelector('input[name=faultyItems]')
+    const faultyItems = this.document.getElementById('faultyItems')
     const copilotName = this.document.querySelector('input[name=copilotName]')
     const fuelLevel = this.document.querySelector('input[name=fuelLevel]')
     const cargoMass = this.document.querySelector('input[name=cargoMass]')
- 
-    // re-read 23.5
-    // get button
-    // addEventListener on button
-    // add form validation inside button event listener
+    const launchStatusCheck = this.document.getElementById('launchStatusCheck')
+    const pilotStatus = this.document.getElementById('pilotStatus')
+    const copilotStatus = this.document.getElementById('copilotStatus')
+    const fuelStatus = this.document.getElementById('fuelStatus')
+    const cargoStatus = this.document.getElementById('cargoStatus')
+
     console.log('pilot name', pilotName)
     console.log("testForm", testForm)
     console.log('formSubmit ', formSubmit)
-    //console.log(formSubmit)
+    console.log('launch status check ', launchStatusCheck)
+    console.log('faultyItems ', faultyItems)
+    
     formSubmit.addEventListener("click", function (event) {
         event.preventDefault()
-        console.log(formSubmission(pilotName, copilotName, fuelLevel, cargoMass))
+        // faultyItems.style.visibility = 'visible'
+        formSubmission(window.document, faultyItems, pilotName.value, copilotName.value, fuelLevel.value, cargoMass.value) 
     })
 
 //    let listedPlanets;

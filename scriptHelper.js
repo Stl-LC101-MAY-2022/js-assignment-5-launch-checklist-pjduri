@@ -26,27 +26,55 @@ function addDestinationInfo(document, name, diameter, star,
    */
 }
 
-const validateInput = (testInput) => {
-    const inputReturns = []
+function validateInput (testInput) {
+    // const messages = []
+    // if(testInput === '' || testInput === null) {
+    //     messages.push('Empty')
+    // } else if(isNaN(testInput)) {
+    //     messages.push('Not a number')
+    // } else if(!isNaN(testInput)) {
+    //     messages.push('Is a number')
+    // }
+    // return messages
     if(testInput === '' || testInput == null) {
-        inputReturns.push('Empty')
+        return 'Empty'
+    } else if(isNaN(Number(testInput))) {
+        return 'Not a number'
+    } else if(!isNaN(Number(testInput))) {
+        return 'Is a number'
     }
-    if(isNaN(testInput)) {
-        inputReturns.push('Not a number')
-    } else if(!isNaN(testInput)) {
-        inputReturns.push('Is a number')
-    }
-    return inputReturns
 }
 
-// function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
-function formSubmission(pilot, copilot, fuelLevel, cargoLevel) {
-   const testArr = [pilot, copilot, fuelLevel, cargoLevel]
-   for (i=0; i<testArr.length; i++) {
-    if (validateInput(testArr[i]) === 'Empty') {
-        alert('All fields required')
+function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
+    const resultsArr = []
+    const pilotResult = validateInput(pilot)
+    const copilotResult = validateInput(copilot)
+    const fuelLevelResult = validateInput(fuelLevel)
+    const cargoLevelResult = validateInput(cargoLevel)
+
+    list.style.visibility = 'visible'
+    resultsArr.push(pilotResult, copilotResult, fuelLevelResult, cargoLevelResult)
+    for (let i=0; i<resultsArr.length; i++) {
+        if (resultsArr[i] === 'Empty') {
+            alert('All fields required.')
+        }
     }
-   }
+    if (pilotResult === 'Is a number' || copilotResult === 'Is a number') {
+        alert('Pilot and Copilot fields cannot contain numbers.')
+    }
+    if (fuelLevelResult === 'Not a number' || cargoLevelResult === 'Not a number') {
+        alert('Fuel and Cargo Levels must be numbers.')
+    }
+    console.log('IT LIIIIVES!!!')
+
+
+    // const testArr = [pilot, copilot, fuelLevel, cargoLevel]
+    // for (let i=0; i<3; i++) {
+    //     if (validateInput(testArr[i]) === 'Empty') {
+    //         alert('All fields required')
+    //     }
+    // }
+
 }
 
 async function myFetch() {
