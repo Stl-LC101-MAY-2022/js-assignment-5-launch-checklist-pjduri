@@ -17,7 +17,7 @@ window.addEventListener("load", function() {
     const cargoStatus = this.document.getElementById('cargoStatus')
     const launchStatus = this.document.getElementById('launchStatus')
     const missionTarget = this.document.getElementById('missionTarget')
-    const statusChecklist = [launchStatus, pilotStatus, copilotStatus, fuelStatus, cargoStatus]
+    const statusChecklist = [pilotStatus, copilotStatus, fuelStatus, cargoStatus]
 
     // console.log('pilot name', pilotName)
     // console.log("testForm", testForm)
@@ -29,7 +29,7 @@ window.addEventListener("load", function() {
     formSubmit.addEventListener("click", function (event) {
         event.preventDefault()
         // faultyItems.style.visibility = 'visible'
-        formSubmission(document, statusChecklist, pilotName.value, copilotName.value, fuelLevel.value, cargoMass.value) 
+        formSubmission(launchStatus, statusChecklist, pilotName.value, copilotName.value, fuelLevel.value, cargoMass.value) 
     })
 
    let listedPlanets;
@@ -42,7 +42,7 @@ window.addEventListener("load", function() {
        //console.log(listedPlanetsResponse[1]);
    }).then(function () {
        //console.log(listedPlanets);
-       let selection = listedPlanets[3]
+       let selection = pickPlanet(listedPlanets)
        console.log(selection)
        addDestinationInfo(missionTarget, selection.name, selection.diameter, selection.star, 
         selection.distance, selection.moons, selection.image)

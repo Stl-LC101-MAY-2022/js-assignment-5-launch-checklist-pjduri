@@ -36,49 +36,68 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     const fuelLevelResult = validateInput(fuelLevel)
     const cargoLevelResult = validateInput(cargoLevel)
     const launchReady = []
+    const emptyCheck = []
 
     resultsArr.push(pilotResult, copilotResult, fuelLevelResult, cargoLevelResult)
-    for (let i=0; i<resultsArr.length; i++) {
-        if (resultsArr[i] === 'Empty') {
-            alert('All fields required.')
-            break
-        }
-    }
+    // for (let i=0; i<resultsArr.length; i++) {
+    //     if (resultsArr[i] === 'Empty') {
+    //         list[i].innerHTML = `Not ready.`
+    //         emptyCheck.push('empty fields')
+    //     } else {
+    //         emptyCheck.push('ok')
+    //     }
+    //     if (emptyCheck.length >= resultsArr.length && emptyCheck.includes('empty fields')) {
+    //         alert('All fields are required!')
+    //         break
+    //     }
+    // }
     if (pilotResult === 'Is a number' || copilotResult === 'Is a number') {
-        alert('Pilot and Copilot fields cannot contain numbers.')
-        list[1].innerHTML = `Pilot ${pilot} is not ready.`
-        list[2].innerHTML = `Copilot ${copilot} is not ready.`
+        alert('Make sure to enter valid information for each field!')
+        list[0].innerHTML = `Pilot ${pilot} is not ready for launch.`
+        list[1].innerHTML = `Copilot ${copilot} is not ready for launch.`
         launchReady.push('no')
     } else if (pilotResult === 'Not a number' || copilotResult === 'Not a number') {
-        list[1].innerHTML = `Pilot ${pilot} is ready.`
-        list[2].innerHTML = `Copilot ${copilot} is ready.`
+        list[0].innerHTML = `Pilot ${pilot} is ready for launch.`
+        list[1].innerHTML = `Copilot ${copilot} is ready for launch.`
     }
     if (fuelLevelResult === 'Not a number' || cargoLevelResult === 'Not a number') {
-        alert('Fuel and Cargo Levels must be numbers.')
+        alert('Make sure to enter valid information for each field!')
         launchReady.push('no')
     }
     if (fuelLevel < 10000){
-        list[3].innerHTML = `Fuel too low.`
+        list[2].innerHTML = 'Fuel level too low for launch'
         launchReady.push('no')
     } else {
-        list[3].innerHTML = 'Fuel high enough for takeoff.'
+        list[2].innerHTML = 'Fuel level high enough for launch'
 
     } 
     if (cargoLevel > 10000) {
-        list[4].innerHTML = 'Too much mass for takeoff.'
+        list[3].innerHTML = 'Cargo mass too heavy for launch'
         launchReady.push('no')
     } else {
-        list[4].innerHTML = 'Cargo mass low enough for takeoff.'
+        list[3].innerHTML = 'Cargo mass low enough for launch'
     }
     for (let i=0; i<list.length; i++) {
         list[i].style.visibility = 'visible'
     }
     if (launchReady.includes('no')) {
-        list[0].style.color = 'red'
-        list[0].innerHTML = 'Shuttle not ready for launch.'
+        document.style.color = "rgb(199, 37, 78)"
+        document.innerHTML = 'Shuttle not ready for launch.'
     } else {
-        list[0].style.color = 'green'
-        list[0].innerHTML = 'Shuttle ready for launch.'
+        document.style.color = "rgb(65, 159, 106)"
+        document.innerHTML = 'Shuttle ready for launch.'
+    }
+    for (let i=0; i<resultsArr.length; i++) {
+        if (resultsArr[i] === 'Empty') {
+            list[i].innerHTML = `Not ready.`
+            emptyCheck.push('empty fields')
+        } else {
+            emptyCheck.push('ok')
+        }
+        if (emptyCheck.length >= resultsArr.length && emptyCheck.includes('empty fields')) {
+            alert('All fields are required!')
+            break
+        }
     }
 
 }
@@ -95,8 +114,9 @@ async function myFetch() {
 }
 
 function pickPlanet(planets) {
-    planets = myFetch()
-    return planets
+    let index = Math.floor(Math.random() * (planets.length))
+    console.log(index)
+    return planets[index]
 }
 
 module.exports.addDestinationInfo = addDestinationInfo;
