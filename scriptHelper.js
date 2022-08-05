@@ -39,18 +39,6 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     const emptyCheck = []
 
     resultsArr.push(pilotResult, copilotResult, fuelLevelResult, cargoLevelResult)
-    // for (let i=0; i<resultsArr.length; i++) {
-    //     if (resultsArr[i] === 'Empty') {
-    //         list[i].innerHTML = `Not ready.`
-    //         emptyCheck.push('empty fields')
-    //     } else {
-    //         emptyCheck.push('ok')
-    //     }
-    //     if (emptyCheck.length >= resultsArr.length && emptyCheck.includes('empty fields')) {
-    //         alert('All fields are required!')
-    //         break
-    //     }
-    // }
     if (pilotResult === 'Is a number' || copilotResult === 'Is a number') {
         alert('Make sure to enter valid information for each field!')
         list[0].innerHTML = `Pilot ${pilot} is not ready for launch.`
